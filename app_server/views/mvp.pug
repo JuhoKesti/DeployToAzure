@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1 HLTV MVP of each Major
+  ul
+  each player in players
+      li= player.event + ', '+ player.year + ', MVP of the Major: ' + player.gamer
