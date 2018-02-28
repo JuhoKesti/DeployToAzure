@@ -1,0 +1,27 @@
+.navbar{
+  background-color: #252323!important; /* !important overrides the default bootstrap color */
+}
+
+.footer{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+/*
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #c7c7c7;
+  height: 60px;
+  text-align: center;
+  */
+}
+
+
+a:hover{
+  color: #777777!important;
+}
+
