@@ -1,19 +1,30 @@
+const request = require('request');
+const apiURL = require('./apiURLS');
+
 const playerlist = function(req, res){
-  res.render('mvp',{
-    players:[
-        {event:'ELEAGUE Major: Boston', year:'2018', gamer:'Tarik'},
-        {event:'PGL Major Kraków', year:'2017', gamer:'Adren'},
-        {event:'ELEAGUE Major: Atlanta', year:'2017', gamer:'Kjaerbye'},
-        {event:'ESL One: Cologne', year:'2016', gamer:'coldzera'},
-        {event:'MLG Major Championship: Columbus', year:'2016', gamer:'coldzera'},
-        {event:'DreamHack Open Cluj-Napoca', year:'2015', gamer:'kennyS'},
-        {event:'ESL One: Cologne', year:'2015', gamer:'flusha'},
-        {event:'ESL One: Katowice', year:'2015', gamer:'olofmeister'},
-        {event:'DreamHack Winter', year:'2014', gamer:'Happy'},
-        {event:'ESL One: Cologne', year:'2014', gamer:'friberg'},
-        {event:'ESL Major Series One: Katowice', year:'2014', gamer:'pashaBiceps'},
-        {event:'DreamHack Winter', year:'2013', gamer:'JW'}
-    ]});
+  const path = '/api/mvp';
+  const requestOptions = {
+    url : apiURL.server + path,
+    method : 'GET',
+    json : {},
+    qs : {}
+  };
+  request(
+    requestOptions,
+    function(err, response, body){
+      if(err){
+        res.render('error', {message: err.message});
+      } else if (response.statusCode !== 200){
+        res.render('error', {message: 'Error accessing API: ' + response.statusMessage + " (" + response.statusCode + ")"});
+      } else if (!(body instanceof Array)){
+        res.render('error', {message: 'Unexpected response data'});
+      } else if (!body.length){
+        res.render('error', {message: 'No documents in collection'});
+      } else {
+        res.render('mvp', {players: body});
+      }
+    }
+  );
 };
 module.exports = {
   playerlist
