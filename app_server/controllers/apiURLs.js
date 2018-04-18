@@ -3,7 +3,7 @@ const apiURL = {
 };
 
 if(process.env.NODE_ENV === 'production') {
-  apiURL.server = 'https://http://kesti.azurewebsites.net/';
+  apiURL.server = 'https://kesti.azurewebsites.net/';
 }
 
 module.exports = apiURL;
