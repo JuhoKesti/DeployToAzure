@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .row
+    h4 New HLTV MVP
+  form(action="", method="post")
+    .form-group.row
+      label Event name
+        input.form-control(name="event")
+    .form-group.row
+      label Year
+        input.form-control(name="year")
+    .form-group.row
+      label Player
+        input.form-control(name="gamer")
+    .form-group.row
+      button.btn-primary Add

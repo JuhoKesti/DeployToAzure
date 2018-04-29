@@ -1,6 +1,38 @@
 const request = require('request');
 const apiURL = require('./apiURLS');
 
+const showForm = function(req, res){
+  res.render('mvp_add');
+};
+
+const addData = function(req, res){
+  const path = '/api/mvp';
+
+  const postdata = {
+    event: req.body.event,
+    year: req.body.year,
+    gamer: req.body.gamer
+  };
+
+  const requestOptions = {
+    url : apiURL.server + path,
+    method : 'POST',
+    json : postdata
+  };
+
+  request(
+    requestOptions,
+    function (err, response){
+      if(response.statusCode === 201) {
+        res.redirect('/mvp');
+      }else{
+        res.render('error', {message: 'Error adding data: ' +
+        response.statusMessage+
+        ' ('+ response.statusCode +')'});
+      }
+    }
+  );
+};
 const playerlist = function(req, res){
   const path = '/api/mvp';
   const requestOptions = {
@@ -27,5 +59,7 @@ const playerlist = function(req, res){
   );
 };
 module.exports = {
-  playerlist
+  playerlist,
+  showForm,
+  addData
 };
